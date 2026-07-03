@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 import Home from './pages/Home';
 import Login from './pages/Login';
-import AdminPanel from './pages/AdminPanel';
+import AdminPanel from './pages/adminPanel';
 
 // Simple check to see if user is logged in
 const ProtectedRoute = ({ children }) => {
