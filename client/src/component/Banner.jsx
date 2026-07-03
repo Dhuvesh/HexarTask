@@ -110,7 +110,7 @@ export default function Banner({ data }) {
                 <img 
                   src={`${BASE_URL}${slide.backgroundImage || slide.imageUrl}`} 
                   alt={slide.title}
-                  className="w-full h-full object-cover object-top md:w-auto md:h-auto md:max-h-full md:max-w-full md:object-contain drop-shadow-2xl"
+                  className="w-full h-full object-cover object-top md:w-auto md:h-auto md:max-h-full md:max-w-full md:object-contain drop-shadow-2xl sm:w-md"
                   onError={(e) => e.target.src = "https://via.placeholder.com/600x800?text=No+Image"}
                 />
               </div>
