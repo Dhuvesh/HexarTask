@@ -64,17 +64,17 @@ export default function Banner({ data }) {
       </header>
 
       <div 
-        className="absolute inset-0 z-10 flex w-full h-full transition-transform duration-700 ease-in-out"
+        className="absolute inset-0 z-10 flex w-full h-full transition-transform duration-700 ease-in-out pt-20"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {data.map((slide, index) => (
-          <div key={index} className="min-w-full h-full flex items-center">
+          <div key={index} className="min-w-full h-screen flex items-center">
             
-            {/* 2-Column Grid inside EVERY slide */}
-            <div className="w-full h-full flex flex-col md:grid md:grid-cols-2 md:container md:mx-auto px-4 sm:px-6 md:px-8 items-center md:items-center pt-20 md:pt-0 pb-0 md:pb-0">
+            {/* 2-Column Grid inside EVERY slide — flex-col on mobile, restored original grid on md+ */}
+            <div className="w-full h-full flex flex-col md:container md:mx-auto md:grid md:grid-cols-2 px-4 sm:px-6 md:px-8 items-center">
               
-              {/* MOBILE: Text block (title + subtitle + arrows), centered, on top. Desktop: LEFT column, unchanged */}
-              <div className="flex flex-col justify-center order-1 md:order-1 flex-none md:h-screen text-center md:text-left items-center md:items-start px-2 md:px-0 pb-6 md:pb-0">
+              {/* Text block — top & centered on mobile, restored original LEFT column on desktop */}
+              <div className="flex flex-col justify-center order-1 md:order-1 text-center md:text-left items-center md:items-start px-2 md:px-0 pb-6 md:pb-0 md:h-screen">
                 <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-6 leading-tight drop-shadow-lg">
                   {slide.title}
                 </h1>
@@ -83,7 +83,7 @@ export default function Banner({ data }) {
                   <p className="text-sm sm:text-lg md:text-2xl text-white font-medium drop-shadow-md">
                     {slide.subtitle || 'Take A Look'}
                   </p>
-                  {/* Mobile-only inline arrows, next to subtitle as in design */}
+                  {/* Mobile-only inline arrows, next to subtitle */}
                   <div className="flex md:hidden items-center gap-2 ml-2">
                     <button 
                       onClick={prevSlide}
@@ -105,12 +105,12 @@ export default function Banner({ data }) {
                 </div>
               </div>
 
-              {/* MOBILE: Image, centered, fills remaining space down to the bottom edge. Desktop: RIGHT column, unchanged */}
-              <div className="w-full flex items-center justify-center md:justify-end order-2 md:order-2 flex-1 md:flex-none md:h-[80%] min-h-0">
+              {/* Image — full-bleed below text on mobile, restored original RIGHT column on desktop */}
+              <div className="relative w-full flex items-center justify-center md:justify-end order-2 md:order-2 flex-1 md:flex-none min-h-0 md:h-[80%]">
                 <img 
                   src={`${BASE_URL}${slide.backgroundImage || slide.imageUrl}`} 
                   alt={slide.title}
-                  className="w-full h-full object-cover md:object-contain object-top md:drop-shadow-2xl"
+                  className="w-full h-full object-cover object-top md:w-auto md:h-auto md:max-h-full md:max-w-full md:object-contain drop-shadow-2xl"
                   onError={(e) => e.target.src = "https://via.placeholder.com/600x800?text=No+Image"}
                 />
               </div>
@@ -120,7 +120,7 @@ export default function Banner({ data }) {
         ))}
       </div>
 
-      {/* 4. FIXED ARROWS — desktop only now (mobile arrows moved inline above) */}
+      {/* 4. FIXED ARROWS — desktop only (mobile arrows are inline above, next to subtitle) */}
       <div className="hidden md:block absolute bottom-24 left-0 w-full z-20 pointer-events-none">
         <div className="container mx-auto px-8 grid grid-cols-2">
           {/* Aligned to the left column */}
