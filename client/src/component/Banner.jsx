@@ -30,7 +30,7 @@ export default function Banner({ data }) {
   }, [current, data.length]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-auto md:h-screen w-full overflow-hidden bg-black">
       <video
         autoPlay
         loop
@@ -63,18 +63,19 @@ export default function Banner({ data }) {
         </div>
       </header>
 
+      {/* Content wrapper — normal flow on mobile (so section height = content height, no gap), restored absolute full-bleed overlay on desktop */}
       <div 
-        className="absolute inset-0 z-10 flex w-full h-full transition-transform duration-700 ease-in-out pt-20"
+        className="relative md:absolute md:inset-0 z-10 flex w-full h-auto md:h-full transition-transform duration-700 ease-in-out pt-20"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {data.map((slide, index) => (
-          <div key={index} className="min-w-full h-screen flex items-center">
+          <div key={index} className="min-w-full h-auto md:h-screen flex items-center">
             
-            {/* 2-Column Grid inside EVERY slide — flex-col on mobile, restored original grid on md+ */}
-            <div className="w-full h-full flex flex-col md:container md:mx-auto md:grid md:grid-cols-2 px-4 sm:px-6 md:px-8 items-center">
+            {/* 2-Column Grid inside EVERY slide — flex-col sized to content on mobile, restored original grid on md+ */}
+            <div className="w-full md:h-full flex flex-col md:container md:mx-auto md:grid md:grid-cols-2 px-4 sm:px-6 md:px-8 items-center">
               
               {/* Text block — top & centered on mobile, restored original LEFT column on desktop */}
-              <div className="flex flex-col justify-center order-1 md:order-1 text-center md:text-left items-center md:items-start px-2 md:px-0 pb-6 md:pb-0 md:h-screen">
+              <div className="flex flex-col justify-center order-1 md:order-1 text-center md:text-left items-center md:items-start px-2 md:px-0 pb-4 md:pb-0 md:h-screen">
                 <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-6 leading-tight drop-shadow-lg">
                   {slide.title}
                 </h1>
@@ -105,12 +106,12 @@ export default function Banner({ data }) {
                 </div>
               </div>
 
-              {/* Image — full image visible (contain) on mobile so nothing is cropped, restored original RIGHT column on desktop */}
-              <div className="relative w-full flex items-center justify-center md:justify-end order-2 md:order-2 flex-1 md:flex-none min-h-0 md:h-[80%]">
+              {/* Image — natural height on mobile (no more flex-1 stretch, no leftover gap), restored original RIGHT column on desktop */}
+              <div className="relative w-full flex items-center justify-center md:justify-end order-2 md:order-2 pb-6 md:pb-0 md:flex-none md:h-[80%]">
                 <img 
                   src={`${BASE_URL}${slide.backgroundImage || slide.imageUrl}`} 
                   alt={slide.title}
-                  className="max-w-full max-h-full w-auto h-auto object-contain md:max-h-full md:max-w-full drop-shadow-2xl"
+                  className="max-w-full max-h-[42vh] w-auto h-auto object-contain md:max-h-full drop-shadow-2xl"
                   onError={(e) => e.target.src = "https://via.placeholder.com/600x800?text=No+Image"}
                 />
               </div>
