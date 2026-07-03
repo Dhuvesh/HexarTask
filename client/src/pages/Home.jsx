@@ -4,7 +4,7 @@ import Banner from '../component/Banner';
 import About from '../component/About';
 import Mission from '../component/Mission';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://hexartask.onrender.com/api';
 
 export default function Home() {
   // Initialize banner as an empty array

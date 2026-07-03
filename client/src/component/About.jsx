@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://hexartask.onrender.com';
 
 export default function About({ data }) {
   if (!data) return null;

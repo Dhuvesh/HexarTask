@@ -1,6 +1,6 @@
 import React from "react";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://hexartask.onrender.com";
 const VIDEO_URL = "https://www.w3schools.com/html/mov_bbb.mp4";
 
 export default function Mission({ data }) {

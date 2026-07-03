@@ -1,6 +1,6 @@
 import  { useState, useEffect } from 'react';
 import BgVideo from '../assets/B4B.mp4';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://hexartask.onrender.com';
 import Logo from '../assets/hexar-logo1.png';
 
 
