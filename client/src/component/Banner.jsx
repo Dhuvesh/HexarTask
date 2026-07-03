@@ -105,12 +105,12 @@ export default function Banner({ data }) {
                 </div>
               </div>
 
-              {/* Image — full-bleed below text on mobile, restored original RIGHT column on desktop */}
+              {/* Image — full image visible (contain) on mobile so nothing is cropped, restored original RIGHT column on desktop */}
               <div className="relative w-full flex items-center justify-center md:justify-end order-2 md:order-2 flex-1 md:flex-none min-h-0 md:h-[80%]">
                 <img 
                   src={`${BASE_URL}${slide.backgroundImage || slide.imageUrl}`} 
                   alt={slide.title}
-                  className="w-full h-full object-cover object-top md:w-auto md:h-auto md:max-h-full md:max-w-full md:object-contain drop-shadow-2xl sm:w-md"
+                  className="max-w-full max-h-full w-auto h-auto object-contain md:max-h-full md:max-w-full drop-shadow-2xl"
                   onError={(e) => e.target.src = "https://via.placeholder.com/600x800?text=No+Image"}
                 />
               </div>
