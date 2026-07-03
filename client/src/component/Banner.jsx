@@ -71,20 +71,10 @@ export default function Banner({ data }) {
           <div key={index} className="min-w-full h-full flex items-center">
             
             {/* 2-Column Grid inside EVERY slide */}
-            <div className="w-full h-full flex flex-col md:grid md:grid-cols-2 md:container md:mx-auto px-4 sm:px-6 md:px-8 items-center pt-16 md:pt-0 pb-28 sm:pb-24 md:pb-0">
+            <div className="w-full h-full flex flex-col md:grid md:grid-cols-2 md:container md:mx-auto px-4 sm:px-6 md:px-8 items-center md:items-center pt-20 md:pt-0 pb-0 md:pb-0">
               
-              {/* RIGHT/TOP ON MOBILE — Sliding Image */}
-              <div className="w-full flex items-center justify-center md:justify-end order-1 md:order-2 basis-[38%] md:basis-auto md:h-[80%] shrink-0">
-                <img 
-                  src={`${BASE_URL}${slide.backgroundImage || slide.imageUrl}`} 
-                  alt={slide.title}
-                  className="max-h-full max-w-full object-contain drop-shadow-2xl"
-                  onError={(e) => e.target.src = "https://via.placeholder.com/600x800?text=No+Image"}
-                />
-              </div>
-
-              {/* LEFT/BOTTOM ON MOBILE — Sliding Text */}
-              <div className="flex flex-col justify-center order-2 md:order-1 flex-1 md:flex-none md:h-screen text-center md:text-left items-center md:items-start">
+              {/* MOBILE: Text block (title + subtitle + arrows), centered, on top. Desktop: LEFT column, unchanged */}
+              <div className="flex flex-col justify-center order-1 md:order-1 flex-none md:h-screen text-center md:text-left items-center md:items-start px-2 md:px-0 pb-6 md:pb-0">
                 <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-6 leading-tight drop-shadow-lg">
                   {slide.title}
                 </h1>
@@ -93,7 +83,36 @@ export default function Banner({ data }) {
                   <p className="text-sm sm:text-lg md:text-2xl text-white font-medium drop-shadow-md">
                     {slide.subtitle || 'Take A Look'}
                   </p>
+                  {/* Mobile-only inline arrows, next to subtitle as in design */}
+                  <div className="flex md:hidden items-center gap-2 ml-2">
+                    <button 
+                      onClick={prevSlide}
+                      className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-gray-200 transition-transform hover:scale-110 shadow-xl shrink-0"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m15 18-6-6 6-6"/>
+                      </svg>
+                    </button>
+                    <button 
+                      onClick={nextSlide}
+                      className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-gray-200 transition-transform hover:scale-110 shadow-xl shrink-0"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m9 18 6-6-6-6"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
+              </div>
+
+              {/* MOBILE: Image, centered, fills remaining space down to the bottom edge. Desktop: RIGHT column, unchanged */}
+              <div className="w-full flex items-center justify-center md:justify-end order-2 md:order-2 flex-1 md:flex-none md:h-[80%] min-h-0">
+                <img 
+                  src={`${BASE_URL}${slide.backgroundImage || slide.imageUrl}`} 
+                  alt={slide.title}
+                  className="w-full h-full object-cover md:object-contain object-top md:drop-shadow-2xl"
+                  onError={(e) => e.target.src = "https://via.placeholder.com/600x800?text=No+Image"}
+                />
               </div>
 
             </div>
@@ -101,25 +120,25 @@ export default function Banner({ data }) {
         ))}
       </div>
 
-      {/* 4. FIXED ARROWS (Sits on top of the slider, never moves) */}
-      <div className="absolute bottom-6 sm:bottom-8 md:bottom-24 left-0 w-full z-20 pointer-events-none">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-center md:grid md:grid-cols-2">
+      {/* 4. FIXED ARROWS — desktop only now (mobile arrows moved inline above) */}
+      <div className="hidden md:block absolute bottom-24 left-0 w-full z-20 pointer-events-none">
+        <div className="container mx-auto px-8 grid grid-cols-2">
           {/* Aligned to the left column */}
-          <div className="flex justify-center md:justify-start gap-3 md:gap-4 pointer-events-auto">
+          <div className="flex justify-start gap-4 pointer-events-auto">
             <button 
               onClick={prevSlide}
-              className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-gray-200 transition-transform hover:scale-110 shadow-xl"
+              className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-gray-200 transition-transform hover:scale-110 shadow-xl"
             >
-              <svg width="20" height="20" className="md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m15 18-6-6 6-6"/>
               </svg>
             </button>
 
             <button 
               onClick={nextSlide}
-              className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-gray-200 transition-transform hover:scale-110 shadow-xl"
+              className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-gray-200 transition-transform hover:scale-110 shadow-xl"
             >
-              <svg width="20" height="20" className="md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m9 18 6-6-6-6"/>
               </svg>
             </button>

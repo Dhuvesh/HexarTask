@@ -58,7 +58,6 @@ export default function AdminPanel() {
     if (token) fetchAllEntries();
   }, [activeTab]);
 
-  // 2. Handle Edit (Fill form with past data)
   const handleEdit = (item) => {
     setEditId(item._id);
     if (activeTab === "banner")
